@@ -101,7 +101,7 @@ function Contact() {
         {/* Contact Info */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
-            { title: "📧 Email", value: "support@bookstore.com" },
+            { title: "📧 Email", value: "support@learnhub.com" },
             { title: "📞 Phone", value: "+91 98765 43210" },
             { title: "📍 Location", value: "Lucknow, Uttar Pradesh, India" },
           ].map((item, i) => (

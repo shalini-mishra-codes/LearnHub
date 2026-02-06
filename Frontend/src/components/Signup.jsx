@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/course";
+  const from = location.state?.from?.pathname || "/";
   
   const {
     register,
@@ -24,22 +24,39 @@ function Signup() {
       password: data.password,
     };
     
-    await axios
-      .post("http://localhost:4001/user/signup", userInfo)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          toast.success("Signup successful!");
-          navigate(from, { replace: true });
-        }
+    try {
+      // Step 1: Signup
+      const res = await axios.post("http://localhost:4001/user/signup", userInfo);
+      
+      if (res.data) {
+        // Save user data
         localStorage.setItem("Users", JSON.stringify(res.data.user));
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err);
-          toast.error("Error: " + err.response.data.message);
+        
+        // Step 2: Auto login (background mein, silently)
+        const loginRes = await axios.post("http://localhost:4001/user/login", {
+          email: data.email,
+          password: data.password,
+        });
+        
+        if (loginRes.data) {
+          // Save token
+          localStorage.setItem("token", loginRes.data.token);
+          
+          // ✅ Sirf ek hi success message
+          toast.success("Signup successful! Welcome to learnHub!");
+          
+          // Redirect to homepage
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1500);
         }
-      });
+      }
+    } catch (err) {
+      if (err.response) {
+        console.log(err);
+        toast.error("Error: " + err.response.data.message);
+      }
+    }
   };
 
   return (
@@ -57,7 +74,6 @@ function Signup() {
 
               <h3 className="font-bold text-lg">Signup</h3>
               
-              {/* Name */}
               <div className="mt-4 space-y-2">
                 <span>Name</span>
                 <br />
@@ -75,7 +91,6 @@ function Signup() {
                 )}
               </div>
               
-              {/* Email */}
               <div className="mt-4 space-y-2">
                 <span>Email</span>
                 <br />
@@ -93,7 +108,6 @@ function Signup() {
                 )}
               </div>
               
-              {/* Password */}
               <div className="mt-4 space-y-2">
                 <span>Password</span>
                 <br />
@@ -111,12 +125,11 @@ function Signup() {
                 )}
               </div>
 
-              {/* Button */}
               <div className="flex justify-around mt-4">
                 <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200">
                   Signup
                 </button>
-                <p className="text-xl">
+                <div className="text-xl">
                   Have account?{" "}
                   <button
                     type="button"
@@ -126,14 +139,14 @@ function Signup() {
                     }
                   >
                     Login
-                  </button>{" "}
-                  <Login />
-                </p>
+                  </button>
+                </div>
               </div>
             </form>
           </div>
         </div>
       </div>
+      <Login />
     </>
   );
 }
