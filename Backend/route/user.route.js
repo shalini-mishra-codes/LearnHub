@@ -2,6 +2,7 @@
 import express from "express";
 import { signup, login, getUserProfile } from "../controller/user.controller.js";
 import { authenticate } from "../middleware/auth.js";
+import User from "../model/user.model.js";
 
 
 const router = express.Router();

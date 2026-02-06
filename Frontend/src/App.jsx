@@ -10,11 +10,6 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Admin from "./components/Admin";
 
-
-
-
-
-
 function App() {
   const [authUser, setAuthUser] = useAuth();
   console.log(authUser);
@@ -22,7 +17,6 @@ function App() {
     <>
       {/* <div className="dark:bg-slate-900 dark:text-white"> */}
       <div className="min-h-screen bg-white dark:bg-slate-900 dark:text-white">
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -34,8 +28,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
-
-        </Routes>
+           </Routes>
         <Toaster />
       </div>
     </>
