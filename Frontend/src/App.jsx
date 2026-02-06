@@ -9,6 +9,8 @@ import Profile from "./components/Profile";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Admin from "./components/Admin";
+import Cart from "./components/Cart";
+import Wishlist from "./components/Wishlist";
 
 function App() {
   const [authUser, setAuthUser] = useAuth();
@@ -28,6 +30,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+
            </Routes>
         <Toaster />
       </div>
