@@ -4,20 +4,20 @@
 
  3:- Git clone repo_url
 
- 5:- open the folder
+ 4:- open the folder
                unzip frontend 
                Unzip backend
 
- 6:- Go back to main folder. 
+ 5:- Go back to main folder. 
 
- 7:- right click open in terminal 
+ 6:- right click open in terminal 
 
- 8:- code .
+ 7:- code .
 
- 9:- move to frontend
+ 8:- move to frontend
             npm install 
             npm run dev
 
- 10:- move backend
+ 9:- move backend
           npm install 
           npm start
